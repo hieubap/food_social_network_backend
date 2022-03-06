@@ -50,16 +50,16 @@ public class Config extends WebSecurityConfigurerAdapter {
     http.csrf().disable()
         .cors()
         .and()
-        .addFilterBefore(new JwtFilter(secretKey), UsernamePasswordAuthenticationFilter.class)
-        .exceptionHandling().accessDeniedHandler(accessDeniedHandle)
-        .and()
-        .exceptionHandling().authenticationEntryPoint(authenticationEntryPointHandle)
-        .and()
+//        .addFilterBefore(new JwtFilter(secretKey), UsernamePasswordAuthenticationFilter.class)
+//        .exceptionHandling().accessDeniedHandler(accessDeniedHandle)
+//        .and()
+//        .exceptionHandling().authenticationEntryPoint(authenticationEntryPointHandle)
+//        .and()
         .authorizeRequests()
-        .antMatchers(HttpMethod.PUT,unauthorization).permitAll()
-        .antMatchers(HttpMethod.POST,unauthorization).permitAll()
-        .antMatchers(HttpMethod.GET,unauthorization).permitAll()
-        .anyRequest().authenticated();
+            .anyRequest().permitAll();
+//        .antMatchers(HttpMethod.PUT,unauthorization).permitAll()
+//        .antMatchers(HttpMethod.POST,unauthorization).permitAll()
+//        .antMatchers(HttpMethod.GET,unauthorization).permitAll();
 
   }
 
