@@ -4,8 +4,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 import spring.boot.core.dao.model.BaseEntity;
+import spring.boot.food.social.network.dto.UserDTO;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "team")
@@ -23,4 +25,11 @@ public class TeamEntity extends BaseEntity {
     private Integer numberMember;
 
     private Long idLeader;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "team_user",
+            joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private List<UserEntity> listUsers;
 }

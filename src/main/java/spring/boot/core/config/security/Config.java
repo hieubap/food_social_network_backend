@@ -39,9 +39,7 @@ public class Config extends WebSecurityConfigurerAdapter {
   }
 
   protected void configure(HttpSecurity http) throws Exception {
-    http
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-    ;
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     String[] unauthorization = listUnAuthorization.split(",");
     for(String s : unauthorization)
