@@ -38,7 +38,4 @@ public class TeamDTO extends BaseDTO {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long idNewUser;
-
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private ZonedDateTime time;
 }

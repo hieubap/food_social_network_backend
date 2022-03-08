@@ -29,8 +29,6 @@ public class TeamEntity extends BaseEntity {
 
     private Boolean active;
 
-    private ZonedDateTime time;
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "team_user",

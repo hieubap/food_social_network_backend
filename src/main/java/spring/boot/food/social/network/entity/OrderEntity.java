@@ -6,6 +6,7 @@ import org.hibernate.annotations.Where;
 import spring.boot.core.dao.model.BaseEntity;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "tb_order")
@@ -26,6 +27,8 @@ public class OrderEntity extends BaseEntity {
     private Integer numMember;
 
     private Integer state;
+
+    private ZonedDateTime time;
 
     @OneToOne
     @JoinColumn(name = "id_team", insertable = false, updatable = false)
