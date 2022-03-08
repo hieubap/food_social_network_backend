@@ -7,6 +7,7 @@ import spring.boot.core.dao.model.BaseEntity;
 import spring.boot.food.social.network.dto.UserDTO;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Entity
@@ -26,10 +27,17 @@ public class TeamEntity extends BaseEntity {
 
     private Long idLeader;
 
+    private Boolean active;
+
+    private ZonedDateTime time;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "team_user",
             joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<UserEntity> listUsers;
+
+    @OneToOne(mappedBy = "teamEntity")
+    private OrderEntity orderEntity;
 }

@@ -10,6 +10,8 @@ import spring.boot.food.social.network.dto.TeamDTO;
 import spring.boot.food.social.network.entity.FoodEntity;
 import spring.boot.food.social.network.entity.TeamEntity;
 
+import java.util.List;
+
 @Repository
 public interface TeamRepository extends BaseRepository<TeamEntity, TeamDTO,Long> {
     @Override
@@ -19,4 +21,6 @@ public interface TeamRepository extends BaseRepository<TeamEntity, TeamDTO,Long>
             "                   where u.id = :#{#dto.userId})" +
             "       or :#{#dto.userId} = e.idLeader or :#{#dto.userId} is null)")
     Page<TeamEntity> search(TeamDTO dto, Pageable pageable);
+
+    List<TeamEntity> findByIdRes(Long idRes);
 }

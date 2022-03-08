@@ -18,6 +18,7 @@ public class OrderEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "id_team")
     private Long idTeam;
 
     private String phoneNumber;
@@ -25,4 +26,8 @@ public class OrderEntity extends BaseEntity {
     private Integer numMember;
 
     private Integer state;
+
+    @OneToOne
+    @JoinColumn(name = "id_team", insertable = false, updatable = false)
+    private TeamEntity teamEntity;
 }

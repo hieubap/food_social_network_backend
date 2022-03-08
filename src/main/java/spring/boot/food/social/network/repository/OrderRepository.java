@@ -7,4 +7,5 @@ import spring.boot.food.social.network.entity.OrderEntity;
 
 @Repository
 public interface OrderRepository extends BaseRepository<OrderEntity, OrderDTO,Long> {
+    OrderEntity findByIdTeam(Long idTeam);
 }
