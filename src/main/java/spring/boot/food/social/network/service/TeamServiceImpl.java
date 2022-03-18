@@ -110,7 +110,7 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
             boolean isOnRoom = teamEntityList.get(i).getIdLeader().equals(dto.getIdNewUser());
 
             for(int j = 0;j<listUsers.size();j++){
-                if(listUsers.get(j).getId() == dto.getIdNewUser()){
+                if(listUsers.get(j).getId().equals(dto.getIdNewUser())){
                     isOnRoom = true;
                     break;
                 }
