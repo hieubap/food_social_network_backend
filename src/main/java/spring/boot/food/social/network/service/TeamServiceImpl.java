@@ -61,6 +61,9 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
             throw new BaseException("Nhóm đã bị khóa không thể thêm thành viên");
         }
         List<UserEntity> listUsers = teamEntity.getListUsers();
+        if(listUsers.size() > 1){
+            throw new BaseException("Không thể thêm quá 3 thành viên");
+        }
         if(listUsers == null){
             listUsers = new ArrayList<>();
         }
@@ -84,20 +87,11 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
         }
 
         TeamEntity teamEntity = getById(dto.getId());
-
-        if(dto.getIdNewUser() == teamEntity.getIdLeader()){
-            return dto;
-        }
         List<UserEntity> listUsers = teamEntity.getListUsers();
         if(listUsers == null){
             listUsers = new ArrayList<>();
         }
 
-        for(int i = 0;i< listUsers.size();i++){
-            if(listUsers.get(i).getId() == dto.getIdNewUser()){
-                throw new BaseException("Người dùng đang trong nhóm");
-            }
-        }
         listUsers.add(userEntity);
         teamEntity.setListUsers(listUsers);
         save(teamEntity,dto);
@@ -106,9 +100,7 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
 
     @Override
     public TeamDTO joinTeamRes(TeamDTO dto) {
-
         List<TeamEntity> teamEntityList = teamRepository.findByIdRes(dto.getIdRes());
-//        boolean isCreateNew = true;
         int indexCanEnter = -1;
         for(int i = 0;i< teamEntityList.size();i++){
             List<UserEntity> listUsers = teamEntityList.get(i).getListUsers();
@@ -132,23 +124,15 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
                 indexCanEnter = i;
             }
         }
-
-
-//        if(canEnter){
-//            for(int j = 0;j< listUsers.size();j++){
-//                if(listUsers.get(j).getId().equals(dto.getIdNewUser())){
-//                    return mapToDTO(teamEntityList.get(i));
-//                }
-//            }
-//            dto.setId(teamEntityList.get(i).getId());
-//            addUser2(dto);
-//            return dto;
-//        }
-
-        dto.setIdLeader(dto.getIdNewUser());
-        save(dto);
-//        if(isCreateNew){
-//        }
+        if(indexCanEnter != -1){
+            TeamDTO teamDto = mapToDTO(teamEntityList.get(indexCanEnter));
+            teamDto.setIdLeader(dto.getIdLeader());
+            addUser2(teamDto);
+            return teamDto;
+        } else{
+            dto.setIdLeader(dto.getIdNewUser());
+            save(dto);
+        }
 
         return dto;
     }
