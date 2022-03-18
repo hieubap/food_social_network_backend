@@ -19,10 +19,15 @@ public class PostEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "id_res")
     private Long idRes;
 
     @Column(length = 2000)
     private String content;
 
     private String imgPath;
+
+    @ManyToOne
+    @JoinColumn(name = "id_res",insertable = false ,updatable = false)
+    private ResManagerEntity resManagerEntity;
 }

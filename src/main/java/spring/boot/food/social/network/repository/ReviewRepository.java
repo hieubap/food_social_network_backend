@@ -16,4 +16,10 @@ public interface ReviewRepository extends BaseRepository<ReviewEntity, ReviewDTO
             " and (e.numStar = :#{#dto.numStar} or :#{#dto.numStar} is null)" +
             " and (e.idUser = :#{#dto.idUser} or :#{#dto.idUser} is null)")
     Page<ReviewEntity> search(ReviewDTO dto, Pageable pageable);
+
+    Integer countByIdRes(Long idRes);
+
+    @Query("select sum(e.numStar) from ReviewEntity e" +
+            " where (e.idRes = :#{#idRes} or :#{#idRes} is null)")
+    Integer sumStar(Long idRes);
 }

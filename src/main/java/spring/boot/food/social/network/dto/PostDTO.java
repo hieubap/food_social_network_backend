@@ -28,4 +28,6 @@ public class PostDTO extends BaseDTO {
     private Boolean isLike;
 
     private String avatar;
+
+    private ResManagerDTO resManagerDTO;
 }

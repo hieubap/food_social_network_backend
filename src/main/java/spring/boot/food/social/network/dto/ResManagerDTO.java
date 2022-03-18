@@ -24,4 +24,8 @@ public class ResManagerDTO extends BaseDTO {
     private String avatar;
 
     private Boolean active;
+
+    private Integer numStar;
+
+    private Integer numComment;
 }

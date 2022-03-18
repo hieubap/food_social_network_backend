@@ -15,6 +15,7 @@ public interface UserRepository extends BaseRepository<UserEntity, UserDTO,Long>
     @Override
     @Query("select e from UserEntity e" +
             " where (lower(e.username) like %:#{#dto.username}% or :#{#dto.username} is null)" +
+            " and (lower(e.address) like %:#{#dto.address}% or :#{#dto.address} is null)" +
             " and (lower(e.name) like %:#{#dto.name}% or :#{#dto.name} is null)")
     Page<UserEntity> search(UserDTO dto, Pageable pageable);
 

@@ -11,6 +11,7 @@ import spring.boot.food.social.network.dto.ResManagerDTO;
 import spring.boot.food.social.network.entity.ResManagerEntity;
 import spring.boot.food.social.network.entity.UserEntity;
 import spring.boot.food.social.network.repository.ResManagerRepository;
+import spring.boot.food.social.network.repository.ReviewRepository;
 
 import java.util.Map;
 
@@ -18,6 +19,9 @@ import java.util.Map;
 public class ResManagerServiceImpl extends AbstractBaseService<ResManagerEntity, ResManagerDTO, ResManagerRepository> implements ResManagerService {
     @Autowired
     private ResManagerRepository resManagerRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Autowired
     private JwtProvider jwtProvider;
@@ -71,5 +75,15 @@ public class ResManagerServiceImpl extends AbstractBaseService<ResManagerEntity,
         save(accountEntity, userDTO);
 
         return userDTO;
+    }
+
+    @Override
+    protected void specificMapToDTO(ResManagerEntity entity, ResManagerDTO dto) {
+        super.specificMapToDTO(entity, dto);
+        Integer numComment = reviewRepository.countByIdRes(entity.getId());
+        Integer sumStar = reviewRepository.sumStar(entity.getId());
+        dto.setNumComment(numComment);
+        if(sumStar != null)
+        dto.setNumStar(sumStar/numComment);
     }
 }

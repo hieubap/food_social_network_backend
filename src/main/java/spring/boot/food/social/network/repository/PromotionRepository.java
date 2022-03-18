@@ -14,7 +14,8 @@ import spring.boot.food.social.network.entity.PromotionEntity;
 public interface PromotionRepository extends BaseRepository<PromotionEntity, PromotionDTO,Long> {
     @Override
     @Query("select e from PromotionEntity e" +
-            " where (lower(e.name) like %:#{#dto.content}% or :#{#dto.name} is null) " +
+            " where (lower(e.name) like %:#{#dto.name}% or :#{#dto.name} is null) " +
+            " and (lower(e.content) like %:#{#dto.content}% or :#{#dto.content} is null) " +
             " and (e.idRes = :#{#dto.idRes} or :#{#dto.idRes} is null)")
     Page<PromotionEntity> search(PromotionDTO dto, Pageable pageable);
 }

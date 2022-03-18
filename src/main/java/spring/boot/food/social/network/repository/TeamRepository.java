@@ -16,7 +16,8 @@ import java.util.List;
 public interface TeamRepository extends BaseRepository<TeamEntity, TeamDTO,Long> {
     @Override
     @Query("select e from TeamEntity e" +
-            " where (e.idRes = :#{#dto.idRes} or :#{#dto.idRes} is null)" +
+            " where (e.id = :#{#dto.id} or :#{#dto.id} is null)" +
+            " and (e.idRes = :#{#dto.idRes} or :#{#dto.idRes} is null)" +
             " and (exists(select u from e.listUsers u" +
             "                   where u.id = :#{#dto.userId})" +
             "       or :#{#dto.userId} = e.idLeader or :#{#dto.userId} is null)")

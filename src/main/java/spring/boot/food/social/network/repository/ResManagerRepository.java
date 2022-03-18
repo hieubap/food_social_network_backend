@@ -17,6 +17,7 @@ public interface ResManagerRepository extends BaseRepository<ResManagerEntity, R
     @Override
     @Query("select e from ResManagerEntity e" +
             " where (lower(e.username) like %:#{#dto.username}% or :#{#dto.username} is null)" +
+            " and (lower(e.address) like %:#{#dto.address}% or :#{#dto.address} is null)" +
             " and (lower(e.name) like %:#{#dto.name}% or :#{#dto.name} is null)")
     Page<ResManagerEntity> search(ResManagerDTO dto, Pageable pageable);
 

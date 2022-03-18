@@ -17,7 +17,7 @@ public class FoodDTO extends BaseDTO {
 
     private String name;
 
-    private Long price;
+    private String price;
 
     private String avatar;
 

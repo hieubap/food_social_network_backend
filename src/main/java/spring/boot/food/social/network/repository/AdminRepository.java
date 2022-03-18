@@ -15,6 +15,7 @@ public interface AdminRepository extends BaseRepository<AdminEntity, AdminDTO,Lo
     @Override
     @Query("select e from AdminEntity e" +
             " where (lower(e.username) like %:#{#dto.username}% or :#{#dto.username} is null)" +
+            " and (lower(e.address) like %:#{#dto.address}% or :#{#dto.address} is null)" +
             " and (lower(e.name) like %:#{#dto.name}% or :#{#dto.name} is null)")
     Page<AdminEntity> search(AdminDTO dto, Pageable pageable);
 

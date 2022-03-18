@@ -33,6 +33,8 @@ public class TeamDTO extends BaseDTO {
 
     private OrderDTO order;
 
+    private ResManagerDTO resManagerDTO;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long userId;
 

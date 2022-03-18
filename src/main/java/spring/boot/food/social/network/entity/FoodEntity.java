@@ -22,7 +22,7 @@ public class FoodEntity extends BaseEntity {
 
     private String name;
 
-    private Long price;
+    private String price;
 
     private String avatar;
 }

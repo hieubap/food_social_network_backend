@@ -12,8 +12,19 @@ public class PostServiceImpl extends AbstractBaseService<PostEntity, PostDTO, Po
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private ResManagerService resManagerService;
+
     @Override
     protected PostRepository getRepository() {
         return postRepository;
+    }
+
+    @Override
+    protected void specificMapToDTO(PostEntity entity, PostDTO dto) {
+        super.specificMapToDTO(entity, dto);
+        if(entity.getIdRes() != null){
+            dto.setResManagerDTO(resManagerService.findById(entity.getIdRes()));
+        }
     }
 }
