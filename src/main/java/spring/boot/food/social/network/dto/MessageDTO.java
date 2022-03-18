@@ -20,9 +20,13 @@ public class MessageDTO extends BaseDTO {
 
     private String content;
 
-    private ChatMessage.MessageType type;
+//    private ChatMessage.MessageType type;
 
     private String fullName;
 
     private String avatar;
+
+    private Long idLockAccount;
+
+    private Long type;
 }

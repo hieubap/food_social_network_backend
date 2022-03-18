@@ -28,4 +28,6 @@ public class AdminEntity extends BaseEntity {
     private String address;
 
     private String avatar;
+
+    private Boolean active;
 }

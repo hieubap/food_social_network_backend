@@ -37,6 +37,10 @@ public class ResManagerServiceImpl extends AbstractBaseService<ResManagerEntity,
             throw new BaseException(400, "Tên đăng nhập không tồn tại");
         }
 
+        if (userEntity.getActive() == null || !userEntity.getActive()) {
+            throw new BaseException(400, "Tài khoản đã bị khóa xin vui lòng liên hệ quản trị viên");
+        }
+
         if (!DigestUtil.sha256Hex(dto.getPassword()).equals(userEntity.getPassword())) {
             throw new BaseException(400, "password không chính xác");
         }
@@ -48,7 +52,9 @@ public class ResManagerServiceImpl extends AbstractBaseService<ResManagerEntity,
                 .avatar(userEntity.getAvatar())
                 .build();
 
-        return jwtProvider.generateToken(jwts);
+        Map<String,Object> resData = jwtProvider.generateToken(jwts);
+        resData.put("type",2);
+        return resData;
     }
 
     @Override

@@ -27,4 +27,6 @@ public class UserEntity extends BaseEntity {
     private String address;
 
     private String avatar;
+
+    private Boolean active;
 }

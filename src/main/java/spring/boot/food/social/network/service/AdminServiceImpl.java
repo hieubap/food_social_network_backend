@@ -49,7 +49,9 @@ public class AdminServiceImpl extends AbstractBaseService<AdminEntity, AdminDTO,
                 .avatar(userEntity.getAvatar())
                 .build();
 
-        return jwtProvider.generateToken(jwts);
+        Map<String,Object> resData = jwtProvider.generateToken(jwts);
+        resData.put("type",1);
+        return resData;
     }
 
     @Override

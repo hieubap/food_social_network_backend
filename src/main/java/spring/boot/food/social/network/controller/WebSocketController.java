@@ -35,4 +35,15 @@ public class WebSocketController {
         return message;
     }
 
+
+    @MessageMapping("/chat.lock")
+    @SendTo("/topic/public.realtime")
+    public MessageDTO lockAccount(@Payload MessageDTO chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        // Add username in web socket session
+//        headerAccessor.getSessionAttributes().put("userId", chatMessage.getIdUser());
+//        MessageDTO message = new MessageDTO();
+//        message.setContent("server gửi data về client");
+        return chatMessage;
+    }
+
 }

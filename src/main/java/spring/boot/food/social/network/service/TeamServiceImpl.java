@@ -52,6 +52,9 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
         if(dto.getIdNewUser() == teamEntity.getIdLeader()){
             throw new BaseException("Không thể thêm quản trị nhóm vào nhóm");
         }
+        if(teamEntity.getActive() != null && !teamEntity.getActive()){
+            throw new BaseException("Nhóm đã bị khóa không thể thêm thành viên");
+        }
         List<UserEntity> listUsers = teamEntity.getListUsers();
         if(listUsers == null){
             listUsers = new ArrayList<>();

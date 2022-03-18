@@ -22,4 +22,6 @@ public class AdminDTO extends BaseDTO {
     private String address;
 
     private String avatar;
+
+    private Boolean active;
 }

@@ -20,4 +20,6 @@ public class ReviewDTO extends BaseDTO {
     private String content;
 
     private Integer numStar;
+
+    private UserDTO userDTO;
 }

@@ -22,4 +22,6 @@ public class ResManagerDTO extends BaseDTO {
     private String address;
 
     private String avatar;
+
+    private Boolean active;
 }

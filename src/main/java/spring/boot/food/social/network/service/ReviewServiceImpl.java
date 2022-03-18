@@ -22,9 +22,21 @@ public class ReviewServiceImpl extends AbstractBaseService<ReviewEntity, ReviewD
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     protected ReviewRepository getRepository() {
         return reviewRepository;
+    }
+
+    @Override
+    protected void specificMapToDTO(ReviewEntity entity, ReviewDTO dto) {
+        super.specificMapToDTO(entity, dto);
+
+        if(entity.getIdUser() != null){
+            dto.setUserDTO(userService.findById(entity.getIdUser()));
+        }
     }
 }
 

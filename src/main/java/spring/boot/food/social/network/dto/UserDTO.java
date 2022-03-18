@@ -26,4 +26,6 @@ public class UserDTO extends BaseDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Boolean isAdmin = false;
+
+    private Boolean active;
 }

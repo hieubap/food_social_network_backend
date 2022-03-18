@@ -27,4 +27,6 @@ public class ResManagerEntity extends BaseEntity {
     private String address;
 
     private String avatar;
+
+    private Boolean active;
 }
