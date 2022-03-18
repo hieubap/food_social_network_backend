@@ -105,20 +105,19 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
         for(int i = 0;i< teamEntityList.size();i++){
             List<UserEntity> listUsers = teamEntityList.get(i).getListUsers();
             boolean isOrder = teamEntityList.get(i).getOrderEntity() != null;
-            boolean isActive = teamEntityList.get(i).getActive();
-            boolean isFull = listUsers.size() < 2;
-            boolean isOnRoom = false;
+            boolean isActive = teamEntityList.get(i).getActive() != null && teamEntityList.get(i).getActive();
+            boolean isFull = listUsers.size() > 1;
+            boolean isOnRoom = teamEntityList.get(i).getIdLeader().equals(dto.getIdNewUser());
 
             for(int j = 0;j<listUsers.size();j++){
-                if(listUsers.get(i).getId() == dto.getIdNewUser()
-                        || teamEntityList.get(i).getIdLeader() == dto.getIdNewUser()){
+                if(listUsers.get(i).getId() == dto.getIdNewUser()){
                     isOnRoom = true;
                     break;
                 }
             }
 
             if(isOnRoom && !isOrder){
-                return dto;
+                return mapToDTO(teamEntityList.get(i));
             }
             if(!isOrder && isActive && !isFull){
                 indexCanEnter = i;
@@ -126,7 +125,7 @@ public class TeamServiceImpl extends AbstractBaseService<TeamEntity, TeamDTO, Te
         }
         if(indexCanEnter != -1){
             TeamDTO teamDto = mapToDTO(teamEntityList.get(indexCanEnter));
-            teamDto.setIdLeader(dto.getIdLeader());
+            teamDto.setIdNewUser(dto.getIdNewUser());
             addUser2(teamDto);
             return teamDto;
         } else{
